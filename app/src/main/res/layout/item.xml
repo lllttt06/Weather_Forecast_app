@@ -2,59 +2,80 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="55dp">
 
     <Space
         android:id="@+id/space1"
-        android:layout_width="40dp"
+        android:layout_width="20dp"
         android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="-1dp" />
+
+    <TextView
+        android:id="@+id/info5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="2/21 21:00"
+        android:textSize="17sp"
+        app:layout_constraintStart_toEndOf="@+id/space1"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/info1"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="Element"
-        app:layout_constraintStart_toEndOf="@+id/space1"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toStartOf="@+id/info2"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
         android:id="@+id/info2"
-        android:layout_width="wrap_content"
+        android:layout_width="30dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginEnd="18dp"
+        android:gravity="center"
         android:text="Element"
-        app:layout_constraintStart_toEndOf="@id/info1"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/info3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:text="Element"
+        android:textSize="17sp"
         app:layout_constraintEnd_toStartOf="@+id/info4"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="0dp" />
 
+    <ImageView
+        android:id="@+id/info3"
+        android:layout_width="45dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/info5"
+        app:srcCompat="@drawable/rain"
+        tools:ignore="MissingConstraints" />
+
     <TextView
         android:id="@+id/info4"
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:gravity="center"
         android:text="Element"
-        app:layout_constraintEnd_toStartOf="@id/space2"
-
-        tools:ignore="MissingConstraints" />
+        android:textSize="17sp"
+        app:layout_constraintEnd_toStartOf="@+id/space2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="0dp" />
 
     <Space
         android:id="@+id/space2"
-        android:layout_width="40dp"
+        android:layout_width="20dp"
         android:layout_height="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

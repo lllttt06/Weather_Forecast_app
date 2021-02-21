@@ -20,8 +20,8 @@ class MainViewModel(private val repository: Repository): ViewModel()  {
                 if (items != null) {
                     var num = 0
                     for (i in 0 until items.count()) {
-                        var temp = items[i].temp?: "N/A"
-                        Log.v("location: ", temp)
+                        var Time = items[i].Time?: "N/A"
+                        Log.v("Time: ", Time)
                         num += 1
                     }
                     Log.v("num=", num.toString())

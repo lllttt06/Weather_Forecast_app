@@ -34,10 +34,18 @@
         android:text="TextView2"
         app:layout_constraintTop_toBottomOf="@id/Text3" />
 
+    <TextView
+        android:id="@+id/index"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:text="            時刻                      天気                気温       雲量  　湿度"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        tools:layout_editor_absoluteX="0dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="407dp"
-        android:layout_height="510dp"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

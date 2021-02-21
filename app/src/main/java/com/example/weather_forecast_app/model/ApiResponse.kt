@@ -4,10 +4,9 @@ import java.util.*
 
 data class ApiResponse(
     var temp: String,
-    var location: String,
     var clouds: String,
-    var visibility: String,
-    var time: String,
+    var humidity: String,
+    var Time: String,
     var wind: String,
     var weather: String
 )

@@ -30,13 +30,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupRecyclerview()
+
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        val myPost = Post("Zao")
 
-        val myPost = Post("Scan")
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         viewModel.pushPost(myPost)
-        setupRecyclerview()
         viewModel.myResponse.observe(this, Observer { response ->
             if(response.isSuccessful){
                 response.body()?.let { myAdapter.setData(it) }
