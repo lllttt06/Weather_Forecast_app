@@ -10,5 +10,4 @@
         android:name="com.example.weather_forecast_app.ViewPagerFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

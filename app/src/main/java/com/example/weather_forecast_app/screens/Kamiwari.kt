@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.MainViewModel
 import com.example.weather_forecast_app.MainViewModelFactory
 import com.example.weather_forecast_app.R
@@ -23,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_kamiwari.*
 
 class Kamiwari : Fragment() {
     private lateinit var viewModelKamiwari: MainViewModel
-    //private val myAdapter by lazy { MyAdapter() }
+    private val myAdapter by lazy { MyAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy<ApiResponse> { it.Time.toInt() }
 
     @SuppressLint("SetTextI18n")
@@ -42,12 +43,12 @@ class Kamiwari : Fragment() {
             if(responseKamiwari.isSuccessful){
                 val responseKamiwariSorted = responseKamiwari.body()!!.sortedWith(timeComparator)
                 val iconLabelKamiwari2 = IconMap.iconsDetector[responseKamiwariSorted[0].weather]
-                //responseKamiwariSorted.let { myAdapter.setData(it) }
+                responseKamiwariSorted.let { myAdapter.setData(it) }
                 Log.d("MainActivity", "response:${responseKamiwariSorted[0].weatherDesc}")
                 if (iconLabelKamiwari2 != null) {
                     imageView1_kamiwari.setImageResource(iconLabelKamiwari2)
                 }
-                Text1_kamiwari.text = "Kamiwari"//responseZaoSorted[0].weatherDesc
+                Text1_kamiwari.text = responseKamiwariSorted[0].weatherDesc
                 Text2_kamiwari.text = "日の出 : " + responseKamiwariSorted[0].sunrise
                 Text3_kamiwari.text = "日の入り : " + responseKamiwariSorted[0].sunset
                 Text4_kamiwari.text = "月齢 : " + responseKamiwariSorted[0].lunarPhase
@@ -60,19 +61,20 @@ class Kamiwari : Fragment() {
         })
 
     }
-    /*
-    private fun setupRecyclerview() {
-        recyclerView_kamiwari.adapter = myAdapter
-        recyclerView_kamiwari.layoutManager = LinearLayoutManager(context!!)
-        val itemDecoration = DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL)
-        recyclerView_kamiwari.addItemDecoration(itemDecoration)
-    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kamiwari, container, false)
+        val viewKamiwari = inflater.inflate(R.layout.fragment_kamiwari, container, false)
+        val recyclerViewKamiwari = viewKamiwari.findViewById<RecyclerView>(R.id.recyclerView_kamiwari)
+        val linearLayoutManager = LinearLayoutManager(viewKamiwari.context)
+        val itemDecoration = DividerItemDecoration(viewKamiwari.context, DividerItemDecoration.VERTICAL)
+
+        recyclerViewKamiwari.adapter = myAdapter
+        recyclerViewKamiwari.layoutManager = linearLayoutManager
+        recyclerViewKamiwari.addItemDecoration(itemDecoration)
+
+        return viewKamiwari
     }
 }

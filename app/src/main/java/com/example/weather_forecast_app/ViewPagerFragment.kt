@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import com.example.weather_forecast_app.screens.Home
 import com.example.weather_forecast_app.screens.Kamiwari
 import com.example.weather_forecast_app.screens.Zao
+import kotlinx.android.synthetic.main.fragment_view_pager.*
 import kotlinx.android.synthetic.main.fragment_view_pager.view.*
+import me.relex.circleindicator.CircleIndicator
+import me.relex.circleindicator.CircleIndicator3
 
 class ViewPagerFragment : Fragment() {
 
@@ -30,6 +33,9 @@ class ViewPagerFragment : Fragment() {
             requireActivity().supportFragmentManager,
             lifecycle
         )
+
+        val indicator = view.findViewById<CircleIndicator3>(R.id.indicator)
+        indicator.setViewPager(view.viewPager)
 
         view.viewPager.adapter = adapter
 
