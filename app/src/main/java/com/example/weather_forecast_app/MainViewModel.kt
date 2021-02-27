@@ -12,22 +12,27 @@ import retrofit2.Response
 
 class MainViewModel(private val repository: Repository): ViewModel()  {
     var myResponse: MutableLiveData<Response<List<ApiResponse>>> = MutableLiveData()
+    var myResponseZao: MutableLiveData<Response<List<ApiResponse>>> = MutableLiveData()
+    var myResponseKamiwari: MutableLiveData<Response<List<ApiResponse>>> = MutableLiveData()
+
     fun pushPost(post: Post) {
         viewModelScope.launch {
             val response = repository.pushPost(post)
-            if (response.isSuccessful){
-                val items = response.body()
-                if (items != null) {
-                    var num = 0
-                    for (i in 0 until items.count()) {
-                        var Time = items[i].Time?: "N/A"
-                        Log.v("Time: ", Time)
-                        num += 1
-                    }
-                    Log.v("num=", num.toString())
-                }
-            }
             myResponse.value = response
+        }
+    }
+
+    fun pushPostZao(post: Post) {
+        viewModelScope.launch {
+            val responseZao = repository.pushPost(post)
+            myResponseZao.value = responseZao
+        }
+    }
+
+    fun pushPostKamiwari(post: Post) {
+        viewModelScope.launch {
+            val responseKamiwari = repository.pushPost(post)
+            myResponseKamiwari.value = responseKamiwari
         }
     }
 }

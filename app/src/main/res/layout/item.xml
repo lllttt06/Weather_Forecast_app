@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/index1"
+        android:id="@+id/info1"
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -25,44 +25,44 @@
         tools:ignore="MissingConstraints" />
 
     <ImageView
-        android:id="@+id/index2"
+        android:id="@+id/info2"
         android:layout_width="45dp"
         android:layout_height="40dp"
         android:layout_marginStart="28dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/index1"
+        app:layout_constraintStart_toEndOf="@+id/info1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.466"
         app:srcCompat="@drawable/rain"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/index3"
+        android:id="@+id/info3"
         android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="18dp"
         android:gravity="center"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/index4"
+        app:layout_constraintEnd_toStartOf="@+id/info4"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/index4"
+        android:id="@+id/info4"
         android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="18dp"
         android:gravity="center"
         android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/index5"
+        app:layout_constraintEnd_toStartOf="@+id/info5"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/index5"
+        android:id="@+id/info5"
         android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:textSize="17sp"

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.model.ApiResponse
 import com.example.weather_forecast_app.utils.IconMap.iconsDetector
+import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.item.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -37,13 +38,14 @@ class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
         val temp = convertTemp(myList[position].temp)
         val iconLabel = iconsDetector[myList[position].weather]
         val localTimeNew = localTime.plusHours(position.toLong()).format(DateTimeFormatter.ofPattern("HH"))
-        holder.itemView.index3.text = "$temp℃"
-        holder.itemView.index4.text = myList[position].clouds + "%"
+
+        holder.itemView.info3.text = "$temp℃"
+        holder.itemView.info4.text = myList[position].clouds + "%"
         if (iconLabel != null) {
-            holder.itemView.index2.setImageResource(iconLabel)
+            holder.itemView.info2.setImageResource(iconLabel)
         }
-        holder.itemView.index5.text = myList[position].humidity + "%"
-        holder.itemView.index1.text = "$localTimeNew:00"
+        holder.itemView.info5.text = myList[position].humidity + "%"
+        holder.itemView.info1.text = "$localTimeNew:00"
     }
 
     fun setData(newList: List<ApiResponse>){
