@@ -1,12 +1,11 @@
-package com.example.weather_forecast_app.viewModel
+package myFirstApp.weather_forecast_app.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weather_forecast_app.model.ApiResponse
-import com.example.weather_forecast_app.model.Post
-import com.example.weather_forecast_app.repository.Repository
+import myFirstApp.weather_forecast_app.model.ApiResponse
+import myFirstApp.weather_forecast_app.model.Post
+import myFirstApp.weather_forecast_app.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

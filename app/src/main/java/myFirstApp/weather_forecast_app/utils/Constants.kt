@@ -1,4 +1,4 @@
-package com.example.weather_forecast_app.utils
+package myFirstApp.weather_forecast_app.utils
 
 class Constants {
     companion object{

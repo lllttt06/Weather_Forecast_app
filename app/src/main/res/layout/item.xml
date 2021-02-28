@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="21:00"
-        android:textSize="17sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/space1"
         app:layout_constraintTop_toTopOf="parent"
@@ -28,7 +28,7 @@
         android:id="@+id/info2"
         android:layout_width="45dp"
         android:layout_height="40dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="5dp"
         android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/info1"
@@ -39,11 +39,11 @@
 
     <TextView
         android:id="@+id/info3"
-        android:layout_width="45dp"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
+        android:layout_marginEnd="5dp"
         android:gravity="center"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/info4"
         app:layout_constraintTop_toTopOf="parent"
@@ -51,11 +51,11 @@
 
     <TextView
         android:id="@+id/info4"
-        android:layout_width="45dp"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="18dp"
+        android:layout_marginEnd="5dp"
         android:gravity="center"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/info5"
         app:layout_constraintTop_toTopOf="parent"
@@ -63,10 +63,22 @@
 
     <TextView
         android:id="@+id/info5"
-        android:layout_width="45dp"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/info6"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/info6"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="17sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/space2"
         app:layout_constraintTop_toTopOf="parent"

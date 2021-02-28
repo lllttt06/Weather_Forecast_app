@@ -1,10 +1,9 @@
-package com.example.weather_forecast_app.ui
+package myFirstApp.weather_forecast_app.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.weather_forecast_app.*
-//import androidx.recyclerview.widget.RecyclerView
-//import com.example.weather_forecast_app.adapter.MyAdapter
+import myFirstApp.weather_forecast_app.*
+import myFirstApp.weather_forecast_app.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

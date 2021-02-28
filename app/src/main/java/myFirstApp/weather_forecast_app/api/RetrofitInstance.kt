@@ -1,6 +1,6 @@
-package com.example.weather_forecast_app.api
+package myFirstApp.weather_forecast_app.api
 
-import com.example.weather_forecast_app.utils.Constants.Companion.BASE_URL
+import myFirstApp.weather_forecast_app.utils.Constants.Companion.BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit

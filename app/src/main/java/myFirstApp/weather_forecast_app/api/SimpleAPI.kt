@@ -1,7 +1,7 @@
-package com.example.weather_forecast_app.api
+package myFirstApp.weather_forecast_app.api
 
-import com.example.weather_forecast_app.model.ApiResponse
-import com.example.weather_forecast_app.model.Post
+import myFirstApp.weather_forecast_app.model.ApiResponse
+import myFirstApp.weather_forecast_app.model.Post
 import retrofit2.Response
 import retrofit2.http.*
 interface SimpleAPI {

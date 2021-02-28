@@ -1,6 +1,6 @@
-package com.example.weather_forecast_app.utils
+package myFirstApp.weather_forecast_app.utils
 
-import com.example.weather_forecast_app.R
+import myFirstApp.weather_forecast_app.R
 
 object IconMap {
     val weatherIconsDetector = mapOf (

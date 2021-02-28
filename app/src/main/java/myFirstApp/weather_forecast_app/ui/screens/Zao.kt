@@ -1,8 +1,7 @@
-package com.example.weather_forecast_app.ui.screens
+package myFirstApp.weather_forecast_app.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather_forecast_app.viewModel.MainViewModel
-import com.example.weather_forecast_app.viewModel.MainViewModelFactory
-import com.example.weather_forecast_app.R
-import com.example.weather_forecast_app.model.ApiResponse
-import com.example.weather_forecast_app.model.Post
-import com.example.weather_forecast_app.myAdapter.RecyclerViewAdapter
-import com.example.weather_forecast_app.repository.Repository
-import com.example.weather_forecast_app.utils.IconMap
+import myFirstApp.weather_forecast_app.viewModel.MainViewModel
+import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
+import myFirstApp.weather_forecast_app.R
+import myFirstApp.weather_forecast_app.model.ApiResponse
+import myFirstApp.weather_forecast_app.model.Post
+import myFirstApp.weather_forecast_app.myAdapter.RecyclerViewAdapter
+import myFirstApp.weather_forecast_app.repository.Repository
+import myFirstApp.weather_forecast_app.utils.IconMap
 import kotlinx.android.synthetic.main.fragment_zao.*
 
 class Zao : Fragment() {
@@ -44,7 +43,7 @@ class Zao : Fragment() {
                 val lunarPhaseIconZao = IconMap.lunarPhaseDetector[responseZaoSorted[0].lunarPhaseIcon]
 
                 responseZaoSorted.let { myAdapter.setData(it) }
-                Log.d("MainActivity", "response:${responseZaoSorted[0].weatherDesc}")
+
                 if (weatherIconZao != null) {
                     imageView1_zao.setImageResource(weatherIconZao)
                 }
