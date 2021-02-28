@@ -83,7 +83,8 @@
         <Space
             android:id="@+id/spaceA_home"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Text3_home"
             tools:layout_editor_absoluteX="0dp" />
 
@@ -153,7 +154,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/childconstraintLayout3_home"
             android:layout_width="0dp"
-            android:layout_height="20dp"
+            android:layout_height="40dp"
             app:layout_constraintEnd_toStartOf="@id/guideline_end_home"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline_start_home">
@@ -172,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="時刻"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/spaceX_home"
                 app:layout_constraintTop_toTopOf="parent"
@@ -185,11 +186,10 @@
                 android:layout_marginStart="28dp"
                 android:gravity="center"
                 android:text="天気"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/index1_home"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.466"
                 tools:ignore="MissingConstraints" />
 
             <TextView
@@ -198,8 +198,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="18dp"
                 android:gravity="center"
-                android:text="気温"
-                android:textSize="17sp"
+                android:text="雲量[%]"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/index4_home"
                 app:layout_constraintTop_toTopOf="parent"
@@ -211,8 +211,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="18dp"
                 android:gravity="center"
-                android:text="雲量"
-                android:textSize="17sp"
+                android:text="風速[m/s]"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/index5_home"
                 app:layout_constraintTop_toTopOf="parent"
@@ -222,8 +222,9 @@
                 android:id="@+id/index5_home"
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
-                android:text="湿度"
-                android:textSize="17sp"
+                android:gravity="center"
+                android:text="湿度[%]"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/spaceY_home"
                 app:layout_constraintTop_toTopOf="parent"
@@ -242,7 +243,7 @@
         <Space
             android:id="@+id/spaceB_home"
             android:layout_width="0dp"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end_home"
             app:layout_constraintStart_toStartOf="@+id/guideline_start_home"
             app:layout_constraintTop_toTopOf="parent" />

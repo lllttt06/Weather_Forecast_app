@@ -2,6 +2,7 @@ package com.example.weather_forecast_app.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,13 +41,17 @@ class Home : Fragment() {
         viewModelHome.myResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 val responseSorted = response.body()!!.sortedWith(timeComparator)
-                val iconLabel2 = IconMap.weatherIconsDetector[responseSorted[0].weather]
+                val weatherIcon = IconMap.weatherIconsDetector[responseSorted[0].weather]
+                val lunarPhaseIcon = IconMap.lunarPhaseDetector[responseSorted[0].lunarPhaseIcon]
+                Log.d("Home", responseSorted[0].lunarPhaseIcon)
                 responseSorted.let { myAdapter.setData(it) }
 
-                if (iconLabel2 != null) {
-                    imageView1_home.setImageResource(iconLabel2)
+                if (weatherIcon != null) {
+                    imageView1_home.setImageResource(weatherIcon)
                 }
-
+                if (lunarPhaseIcon != null) {
+                    imageView2_home.setImageResource(lunarPhaseIcon)
+                }
                 Text1_home.text = responseSorted[0].weatherDesc
                 Text2_home.text = "日の出 : " + responseSorted[0].sunrise
                 Text3_home.text = "日の入り : " + responseSorted[0].sunset

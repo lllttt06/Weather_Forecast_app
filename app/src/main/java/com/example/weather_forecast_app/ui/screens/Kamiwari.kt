@@ -42,11 +42,16 @@ class Kamiwari : Fragment() {
         viewModelKamiwari.myResponseKamiwari.observe(this, Observer { responseKamiwari ->
             if(responseKamiwari.isSuccessful){
                 val responseKamiwariSorted = responseKamiwari.body()!!.sortedWith(timeComparator)
-                val iconLabelKamiwari2 = IconMap.weatherIconsDetector[responseKamiwariSorted[0].weather]
+                val weatherIconKamiwari = IconMap.weatherIconsDetector[responseKamiwariSorted[0].weather]
+                val lunarPhaseIconKamiwari = IconMap.lunarPhaseDetector[responseKamiwariSorted[0].lunarPhaseIcon]
+
                 responseKamiwariSorted.let { myAdapter.setData(it) }
                 Log.d("MainActivity", "response:${responseKamiwariSorted[0].weatherDesc}")
-                if (iconLabelKamiwari2 != null) {
-                    imageView1_kamiwari.setImageResource(iconLabelKamiwari2)
+                if (weatherIconKamiwari != null) {
+                    imageView1_kamiwari.setImageResource(weatherIconKamiwari)
+                }
+                if (lunarPhaseIconKamiwari != null) {
+                    imageView2_kamiwari.setImageResource(lunarPhaseIconKamiwari)
                 }
                 Text1_kamiwari.text = responseKamiwariSorted[0].weatherDesc
                 Text2_kamiwari.text = "日の出 : " + responseKamiwariSorted[0].sunrise

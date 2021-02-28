@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.model.ApiResponse
-import com.example.weather_forecast_app.utils.IconMap.iconsDetector
+import com.example.weather_forecast_app.utils.IconMap.weatherIconsDetector
 import kotlinx.android.synthetic.main.item.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
-
-//import com.example.weather_forecast_app.ui.MyViewHolder
 
 class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
 
@@ -28,28 +26,26 @@ class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder
     }
 
     override fun getItemCount(): Int {
-        //Log.d("MyAdapter", "myList.size="+myList.size.toString() )
         return myList.size
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val temp = convertTemp(myList[position].temp)
-        val iconLabel = iconsDetector[myList[position].weather]
+        val iconLabel = weatherIconsDetector[myList[position].weather]
         val localTimeNew = localTime.plusHours(position.toLong()).format(DateTimeFormatter.ofPattern("HH"))
 
-        holder.itemView.info3.text = "$temp℃"
-        holder.itemView.info4.text = myList[position].clouds + "%"
+        holder.itemView.info3.text = myList[position].clouds
+        holder.itemView.info4.text = myList[position].wind
         if (iconLabel != null) {
             holder.itemView.info2.setImageResource(iconLabel)
         }
-        holder.itemView.info5.text = myList[position].humidity + "%"
+        holder.itemView.info5.text = myList[position].humidity
         holder.itemView.info1.text = "$localTimeNew:00"
     }
 
     fun setData(newList: List<ApiResponse>){
         myList = newList
-        Log.d("MyAdapter", "myList:$myList")
         notifyDataSetChanged()
     }
 

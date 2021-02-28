@@ -24,14 +24,14 @@ object IconMap {
             "50n" to R.drawable.mist
     )
 
-    val moonPhaseDetector = mapOf (
-            0 to R.drawable.new_moon,
-            1 to R.drawable.waxing_crescent,
-            2 to R.drawable.first_quarter,
-            3 to R.drawable.waxing_gibbous,
-            4 to R.drawable.full_moon,
-            5 to R.drawable.waning_gibbous,
-            6 to R.drawable.last_quarter,
-            7 to R.drawable.waning_crescent
+    val lunarPhaseDetector = mapOf (
+            "0.0" to R.drawable.new_moon,
+            "1.0" to R.drawable.waxing_crescent,
+            "2.0" to R.drawable.first_quarter,
+            "3.0" to R.drawable.waxing_gibbous,
+            "4.0" to R.drawable.full_moon,
+            "5.0" to R.drawable.waning_gibbous,
+            "6.0" to R.drawable.last_quarter,
+            "7.0" to R.drawable.waning_crescent
     )
 }

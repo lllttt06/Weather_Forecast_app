@@ -40,11 +40,16 @@ class Zao : Fragment() {
         viewModelZao.myResponseZao.observe(this, Observer { responseZao ->
             if(responseZao.isSuccessful){
                 val responseZaoSorted = responseZao.body()!!.sortedWith(timeComparator)
-                val iconLabelZao2 = IconMap.weatherIconsDetector[responseZaoSorted[0].weather]
+                val weatherIconZao = IconMap.weatherIconsDetector[responseZaoSorted[0].weather]
+                val lunarPhaseIconZao = IconMap.lunarPhaseDetector[responseZaoSorted[0].lunarPhaseIcon]
+
                 responseZaoSorted.let { myAdapter.setData(it) }
                 Log.d("MainActivity", "response:${responseZaoSorted[0].weatherDesc}")
-                if (iconLabelZao2 != null) {
-                    imageView1_zao.setImageResource(iconLabelZao2)
+                if (weatherIconZao != null) {
+                    imageView1_zao.setImageResource(weatherIconZao)
+                }
+                if (lunarPhaseIconZao != null) {
+                    imageView2_zao.setImageResource(lunarPhaseIconZao)
                 }
                 Text1_zao.text = responseZaoSorted[0].weatherDesc
                 Text2_zao.text = "日の出 : " + responseZaoSorted[0].sunrise
