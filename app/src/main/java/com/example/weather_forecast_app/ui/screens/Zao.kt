@@ -1,4 +1,4 @@
-package com.example.weather_forecast_app.screens
+package com.example.weather_forecast_app.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,25 +7,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather_forecast_app.MainViewModel
-import com.example.weather_forecast_app.MainViewModelFactory
+import com.example.weather_forecast_app.viewModel.MainViewModel
+import com.example.weather_forecast_app.viewModel.MainViewModelFactory
 import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.model.ApiResponse
 import com.example.weather_forecast_app.model.Post
-import com.example.weather_forecast_app.myAdapter.MyAdapter
+import com.example.weather_forecast_app.myAdapter.RecyclerViewAdapter
 import com.example.weather_forecast_app.repository.Repository
 import com.example.weather_forecast_app.utils.IconMap
 import kotlinx.android.synthetic.main.fragment_zao.*
 
 class Zao : Fragment() {
     private lateinit var viewModelZao: MainViewModel
-    private val myAdapter by lazy { MyAdapter() }
+    private val myAdapter by lazy { RecyclerViewAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy<ApiResponse> { it.Time.toInt() }
 
     @SuppressLint("SetTextI18n")
@@ -41,7 +40,7 @@ class Zao : Fragment() {
         viewModelZao.myResponseZao.observe(this, Observer { responseZao ->
             if(responseZao.isSuccessful){
                 val responseZaoSorted = responseZao.body()!!.sortedWith(timeComparator)
-                val iconLabelZao2 = IconMap.iconsDetector[responseZaoSorted[0].weather]
+                val iconLabelZao2 = IconMap.weatherIconsDetector[responseZaoSorted[0].weather]
                 responseZaoSorted.let { myAdapter.setData(it) }
                 Log.d("MainActivity", "response:${responseZaoSorted[0].weatherDesc}")
                 if (iconLabelZao2 != null) {

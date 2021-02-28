@@ -1,31 +1,29 @@
-package com.example.weather_forecast_app.screens
+package com.example.weather_forecast_app.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather_forecast_app.MainViewModel
-import com.example.weather_forecast_app.MainViewModelFactory
+import com.example.weather_forecast_app.viewModel.MainViewModel
+import com.example.weather_forecast_app.viewModel.MainViewModelFactory
 import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.model.ApiResponse
 import com.example.weather_forecast_app.model.Post
-import com.example.weather_forecast_app.myAdapter.MyAdapter
+import com.example.weather_forecast_app.myAdapter.RecyclerViewAdapter
 import com.example.weather_forecast_app.repository.Repository
 import com.example.weather_forecast_app.utils.IconMap
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class Home : Fragment() {
     private lateinit var viewModelHome: MainViewModel
-    private val myAdapter by lazy { MyAdapter() }
+    private val myAdapter by lazy { RecyclerViewAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy<ApiResponse> { it.Time.toInt() }
 
 
@@ -42,12 +40,13 @@ class Home : Fragment() {
         viewModelHome.myResponse.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 val responseSorted = response.body()!!.sortedWith(timeComparator)
-                val iconLabel2 = IconMap.iconsDetector[responseSorted[0].weather]
-
+                val iconLabel2 = IconMap.weatherIconsDetector[responseSorted[0].weather]
                 responseSorted.let { myAdapter.setData(it) }
+
                 if (iconLabel2 != null) {
                     imageView1_home.setImageResource(iconLabel2)
                 }
+
                 Text1_home.text = responseSorted[0].weatherDesc
                 Text2_home.text = "日の出 : " + responseSorted[0].sunrise
                 Text3_home.text = "日の入り : " + responseSorted[0].sunset

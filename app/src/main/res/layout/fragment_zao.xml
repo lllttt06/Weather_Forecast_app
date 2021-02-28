@@ -118,7 +118,7 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/new_moon" />
+                app:srcCompat="@drawable/last_quarter" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.model.ApiResponse
 import com.example.weather_forecast_app.utils.IconMap.iconsDetector
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.item.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -17,7 +16,7 @@ import kotlin.math.roundToInt
 
 //import com.example.weather_forecast_app.ui.MyViewHolder
 
-class MyAdapter: RecyclerView.Adapter<MyAdapter.MyViewHolder>(){
+class RecyclerViewAdapter: RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>(){
 
     private var myList = emptyList<ApiResponse>()
     private var localTime = LocalDateTime.now()

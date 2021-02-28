@@ -1,4 +1,4 @@
-package com.example.weather_forecast_app.screens
+package com.example.weather_forecast_app.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,19 +12,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.weather_forecast_app.MainViewModel
-import com.example.weather_forecast_app.MainViewModelFactory
+import com.example.weather_forecast_app.viewModel.MainViewModel
+import com.example.weather_forecast_app.viewModel.MainViewModelFactory
 import com.example.weather_forecast_app.R
 import com.example.weather_forecast_app.model.ApiResponse
 import com.example.weather_forecast_app.model.Post
-import com.example.weather_forecast_app.myAdapter.MyAdapter
+import com.example.weather_forecast_app.myAdapter.RecyclerViewAdapter
 import com.example.weather_forecast_app.repository.Repository
 import com.example.weather_forecast_app.utils.IconMap
 import kotlinx.android.synthetic.main.fragment_kamiwari.*
 
 class Kamiwari : Fragment() {
     private lateinit var viewModelKamiwari: MainViewModel
-    private val myAdapter by lazy { MyAdapter() }
+    private val myAdapter by lazy { RecyclerViewAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy<ApiResponse> { it.Time.toInt() }
 
     @SuppressLint("SetTextI18n")
@@ -42,7 +42,7 @@ class Kamiwari : Fragment() {
         viewModelKamiwari.myResponseKamiwari.observe(this, Observer { responseKamiwari ->
             if(responseKamiwari.isSuccessful){
                 val responseKamiwariSorted = responseKamiwari.body()!!.sortedWith(timeComparator)
-                val iconLabelKamiwari2 = IconMap.iconsDetector[responseKamiwariSorted[0].weather]
+                val iconLabelKamiwari2 = IconMap.weatherIconsDetector[responseKamiwariSorted[0].weather]
                 responseKamiwariSorted.let { myAdapter.setData(it) }
                 Log.d("MainActivity", "response:${responseKamiwariSorted[0].weatherDesc}")
                 if (iconLabelKamiwari2 != null) {

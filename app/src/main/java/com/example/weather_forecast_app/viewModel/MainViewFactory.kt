@@ -1,8 +1,7 @@
-package com.example.weather_forecast_app
+package com.example.weather_forecast_app.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.weather_forecast_app.MainViewModel
 import com.example.weather_forecast_app.repository.Repository
 
 class MainViewModelFactory(private val repository: Repository): ViewModelProvider.Factory {
