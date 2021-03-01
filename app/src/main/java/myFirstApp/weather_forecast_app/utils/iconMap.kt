@@ -24,6 +24,27 @@ object IconMap {
             "50n" to R.drawable.mist
     )
 
+    val weatherDescriptionDetector = mapOf(
+            "01d" to "快晴",
+            "01n" to "快晴",
+            "02d" to "晴れ",
+            "02n" to "晴れ",
+            "03d" to "くもり",
+            "03n" to "くもり",
+            "04d" to "曇天",
+            "04n" to "曇天",
+            "09d" to "雨",
+            "09n" to "雨",
+            "10d" to "降雨",
+            "10n" to "降雨",
+            "11d" to "雷雨",
+            "11n" to "雷雨",
+            "13d" to "雪",
+            "13n" to "雪",
+            "50d" to "霧",
+            "50n" to "霧"
+    )
+
     val lunarPhaseDetector = mapOf (
             "0.0" to R.drawable.new_moon,
             "1.0" to R.drawable.waxing_crescent,
@@ -34,4 +55,6 @@ object IconMap {
             "6.0" to R.drawable.last_quarter,
             "7.0" to R.drawable.waning_crescent
     )
+
+
 }

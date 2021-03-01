@@ -10,115 +10,181 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1_zao"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/Text1_zao"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="description"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toStartOf="@+id/Text4_zao"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView1_zao"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/Text2_zao"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Sunrise"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toStartOf="@+id/Text5_zao"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Text1_zao" />
-
-        <TextView
-            android:id="@+id/Text3_zao"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start_zao1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sunset"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toStartOf="@+id/Text6_zao"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Text2_zao" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03" />
 
-        <TextView
-            android:id="@+id/Text4_zao"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Lunar phase"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/Text1_zao"
-            app:layout_constraintTop_toBottomOf="@+id/childconstraintLayout4_zao" />
-
-        <TextView
-            android:id="@+id/Text5_zao"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Moonrise"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/Text2_zao"
-            app:layout_constraintTop_toBottomOf="@+id/Text4_zao" />
-
-        <TextView
-            android:id="@+id/Text6_zao"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end_zao1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Moonset"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.97" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_center_zao1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+
+        <TextView
+            android:id="@+id/textView1_zao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
             android:textSize="17sp"
+            app:layout_constraintBottom_toTopOf="@+id/card1_zao"
+            app:layout_constraintStart_toStartOf="@+id/guideline_center_zao1"
+            app:layout_constraintTop_toBottomOf="@+id/textView2_zao"
+            app:layout_constraintVertical_bias="0.4" />
+
+        <TextView
+            android:id="@+id/textView2_zao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/card1_zao"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/Text3_zao"
-            app:layout_constraintTop_toBottomOf="@+id/Text5_zao" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.335" />
+
+        <ImageView
+            android:id="@+id/imageView1_zao"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/card1_zao"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_center_zao1"
+            app:layout_constraintTop_toBottomOf="@+id/textView2_zao"
+            app:layout_constraintVertical_bias="0.339" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card1_zao"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            app:cardBackgroundColor="@color/glay"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/spaceA_zao"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end_zao1"
+            app:layout_constraintStart_toStartOf="@id/guideline_start_zao1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4_zao"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent">
+
+
+                <TextView
+                    android:id="@+id/Text1_zao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="天文薄明 : 04:41"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/Text4_zao"
+                    app:layout_constraintEnd_toStartOf="@+id/Text2_zao"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/Text2_zao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日の出 : 06:09"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/Text5_zao"
+                    app:layout_constraintEnd_toStartOf="@+id/Text3_zao"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/Text1_zao"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/Text3_zao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日の入り : 18:00"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/Text6_zao"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/Text2_zao"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="spread" />
+
+                <TextView
+                    android:id="@+id/Text4_zao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="月齢 : 16.9"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView2_zao"
+                    app:layout_constraintTop_toBottomOf="@+id/Text1_zao" />
+
+                <ImageView
+                    android:id="@+id/imageView2_zao"
+                    android:layout_width="24dp"
+                    android:layout_height="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/Text1_zao"
+                    app:layout_constraintTop_toBottomOf="@+id/Text1_zao" />
+
+                <TextView
+                    android:id="@+id/Text6_zao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="月の入り : 07:27"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/Text3_zao"
+                    app:layout_constraintTop_toBottomOf="@+id/Text3_zao" />
+
+                <TextView
+                    android:id="@+id/Text5_zao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="月の出 : 19:40"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/Text2_zao"
+                    app:layout_constraintTop_toBottomOf="@+id/Text2_zao" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <Space
             android:id="@+id/spaceA_zao"
             android:layout_width="match_parent"
             android:layout_height="15dp"
-            app:layout_constraintTop_toBottomOf="@id/Text3_zao"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:layout_editor_absoluteX="0dp" />
-
-        <ImageView
-            android:id="@+id/imageView1_zao"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/childconstraintLayout4_zao"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/childconstraintLayout4_zao"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView1_zao"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/imageView2_zao"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:foregroundGravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

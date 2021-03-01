@@ -20,6 +20,7 @@ import myFirstApp.weather_forecast_app.myAdapter.RecyclerViewAdapter
 import myFirstApp.weather_forecast_app.repository.Repository
 import myFirstApp.weather_forecast_app.utils.IconMap
 import kotlinx.android.synthetic.main.fragment_zao.*
+import kotlin.math.roundToInt
 
 class Zao : Fragment() {
     private lateinit var viewModelZao: MainViewModel
@@ -40,7 +41,9 @@ class Zao : Fragment() {
             if(responseZao.isSuccessful){
                 val responseZaoSorted = responseZao.body()!!.sortedWith(timeComparator)
                 val weatherIconZao = IconMap.weatherIconsDetector[responseZaoSorted[0].weather]
+                val weatherDescriptionZao = IconMap.weatherDescriptionDetector[responseZaoSorted[0].weather]
                 val lunarPhaseIconZao = IconMap.lunarPhaseDetector[responseZaoSorted[0].lunarPhaseIcon]
+                val temp = convertTemp(responseZaoSorted[0].temp)
 
                 responseZaoSorted.let { myAdapter.setData(it) }
 
@@ -50,6 +53,9 @@ class Zao : Fragment() {
                 if (lunarPhaseIconZao != null) {
                     imageView2_zao.setImageResource(lunarPhaseIconZao)
                 }
+
+                textView1_zao.text = weatherDescriptionZao
+                textView2_zao.text = "$temp℃"
                 Text1_zao.text = responseZaoSorted[0].weatherDesc
                 Text2_zao.text = "日の出 : " + responseZaoSorted[0].sunrise
                 Text3_zao.text = "日の入り : " + responseZaoSorted[0].sunset
@@ -78,5 +84,10 @@ class Zao : Fragment() {
         recyclerViewZao.addItemDecoration(itemDecoration)
 
         return viewZao
+    }
+
+    private fun convertTemp(absoluteTemp: String): String {
+        var relativeTemp = absoluteTemp.toFloat() - 273.15
+        return relativeTemp.roundToInt().toString()
     }
 }

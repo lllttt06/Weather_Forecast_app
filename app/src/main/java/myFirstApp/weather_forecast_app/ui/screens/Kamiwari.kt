@@ -20,6 +20,7 @@ import myFirstApp.weather_forecast_app.myAdapter.RecyclerViewAdapter
 import myFirstApp.weather_forecast_app.repository.Repository
 import myFirstApp.weather_forecast_app.utils.IconMap
 import kotlinx.android.synthetic.main.fragment_kamiwari.*
+import kotlin.math.roundToInt
 
 class Kamiwari : Fragment() {
     private lateinit var viewModelKamiwari: MainViewModel
@@ -42,7 +43,9 @@ class Kamiwari : Fragment() {
             if(responseKamiwari.isSuccessful){
                 val responseKamiwariSorted = responseKamiwari.body()!!.sortedWith(timeComparator)
                 val weatherIconKamiwari = IconMap.weatherIconsDetector[responseKamiwariSorted[0].weather]
+                val weatherDescriptionKamiwari = IconMap.weatherDescriptionDetector[responseKamiwariSorted[0].weather]
                 val lunarPhaseIconKamiwari = IconMap.lunarPhaseDetector[responseKamiwariSorted[0].lunarPhaseIcon]
+                val temp = convertTemp(responseKamiwariSorted[0].temp)
 
                 responseKamiwariSorted.let { myAdapter.setData(it) }
 
@@ -52,6 +55,9 @@ class Kamiwari : Fragment() {
                 if (lunarPhaseIconKamiwari != null) {
                     imageView2_kamiwari.setImageResource(lunarPhaseIconKamiwari)
                 }
+
+                textView1_kamiwari.text = weatherDescriptionKamiwari
+                textView2_kamiwari.text = "$temp℃"
                 Text1_kamiwari.text = responseKamiwariSorted[0].weatherDesc
                 Text2_kamiwari.text = "日の出 : " + responseKamiwariSorted[0].sunrise
                 Text3_kamiwari.text = "日の入り : " + responseKamiwariSorted[0].sunset
@@ -80,5 +86,10 @@ class Kamiwari : Fragment() {
         recyclerViewKamiwari.addItemDecoration(itemDecoration)
 
         return viewKamiwari
+    }
+
+    private fun convertTemp(absoluteTemp: String): String {
+        var relativeTemp = absoluteTemp.toFloat() - 273.15
+        return relativeTemp.roundToInt().toString()
     }
 }

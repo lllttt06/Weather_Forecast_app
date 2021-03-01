@@ -20,6 +20,7 @@ import myFirstApp.weather_forecast_app.myAdapter.RecyclerViewAdapter
 import myFirstApp.weather_forecast_app.repository.Repository
 import myFirstApp.weather_forecast_app.utils.IconMap
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlin.math.roundToInt
 
 class Home : Fragment() {
     private lateinit var viewModelHome: MainViewModel
@@ -41,7 +42,9 @@ class Home : Fragment() {
             if (response.isSuccessful) {
                 val responseSorted = response.body()!!.sortedWith(timeComparator)
                 val weatherIcon = IconMap.weatherIconsDetector[responseSorted[0].weather]
+                val weatherDescription = IconMap.weatherDescriptionDetector[responseSorted[0].weather]
                 val lunarPhaseIcon = IconMap.lunarPhaseDetector[responseSorted[0].lunarPhaseIcon]
+                val temp = convertTemp(responseSorted[0].temp)
 
                 responseSorted.let { myAdapter.setData(it) }
 
@@ -51,7 +54,11 @@ class Home : Fragment() {
                 if (lunarPhaseIcon != null) {
                     imageView2_home.setImageResource(lunarPhaseIcon)
                 }
-                Text1_home.text = "天文薄明 : 04:41"//responseSorted[0].weatherDesc
+
+                textView1_home.text = weatherDescription
+                textView2_home.text = "$temp℃"
+
+                Text1_home.text = "天文薄明 : 04:41"
                 Text2_home.text = "日の出 : " + responseSorted[0].sunrise
                 Text3_home.text = "日の入り : " + responseSorted[0].sunset
                 Text4_home.text = "月齢 : " + responseSorted[0].lunarPhase
@@ -78,6 +85,11 @@ class Home : Fragment() {
         recyclerViewHome.addItemDecoration(itemDecoration)
 
         return viewHome
+    }
+
+    private fun convertTemp(absoluteTemp: String): String {
+        var relativeTemp = absoluteTemp.toFloat() - 273.15
+        return relativeTemp.roundToInt().toString()
     }
 
 }
