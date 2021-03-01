@@ -10,118 +10,149 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1_home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/Text1_home"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="descrption"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toStartOf="@+id/Text4_home"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView1_home"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/Text2_home"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Sunrise"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toStartOf="@+id/Text5_home"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Text1_home" />
-
-        <TextView
-            android:id="@+id/Text3_home"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start_home1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sunset"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toStartOf="@+id/Text6_home"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Text2_home" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.03" />
 
-        <TextView
-            android:id="@+id/Text4_home"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Lunar phase"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/Text1_home"
-            app:layout_constraintTop_toBottomOf="@+id/childconstraintLayout4_home" />
-
-        <TextView
-            android:id="@+id/Text5_home"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="Moonrise"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/Text2_home"
-            app:layout_constraintTop_toBottomOf="@+id/Text4_home" />
-
-        <TextView
-            android:id="@+id/Text6_home"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end_home1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Moonset"
-            android:textSize="17sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/Text3_home"
-            app:layout_constraintTop_toBottomOf="@+id/Text5_home" />
-
-        <Space
-            android:id="@+id/spaceA_home"
-            android:layout_width="match_parent"
-            android:layout_height="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/Text3_home"
-            tools:layout_editor_absoluteX="0dp" />
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.97" />
 
         <ImageView
             android:id="@+id/imageView1_home"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/childconstraintLayout4_home"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/childconstraintLayout4_home"
-            android:layout_width="100dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card1"
+            android:layout_width="0dp"
             android:layout_height="100dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/imageView1_home"
-            app:layout_constraintTop_toTopOf="parent">
+            app:cardBackgroundColor="@color/glay"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/spaceA_home"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end_home1"
+            app:layout_constraintStart_toStartOf="@id/guideline_start_home1">
 
-            <ImageView
-                android:id="@+id/imageView2_home"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:foregroundGravity="center"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                 />
+                app:layout_constraintStart_toStartOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/Text1_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="天文薄明 : 04:41"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/Text4_home"
+                    app:layout_constraintEnd_toStartOf="@+id/Text2_home"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/Text2_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日の出 : 06:09"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/Text5_home"
+                    app:layout_constraintEnd_toStartOf="@+id/Text3_home"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/Text1_home"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/Text3_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="日の入り : 18:00"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@+id/Text6_home"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/Text2_home"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="spread" />
+
+                <TextView
+                    android:id="@+id/Text4_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="月齢 : 16.9"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView2_home"
+                    app:layout_constraintTop_toBottomOf="@+id/Text1_home" />
+
+                <ImageView
+                    android:id="@+id/imageView2_home"
+                    android:layout_width="24dp"
+                    android:layout_height="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/Text1_home"
+                    app:layout_constraintTop_toBottomOf="@+id/Text1_home" />
+
+                <TextView
+                    android:id="@+id/Text6_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="月の入り : 07:27"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/Text3_home"
+                    app:layout_constraintTop_toBottomOf="@+id/Text3_home" />
+
+                <TextView
+                    android:id="@+id/Text5_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="月の出 : 19:40"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/Text2_home"
+                    app:layout_constraintTop_toBottomOf="@+id/Text2_home" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <Space
+            android:id="@+id/spaceA_home"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -138,14 +169,14 @@
         tools:layout_editor_absoluteX="26dp">
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_start_home"
+            android:id="@+id/guideline_start_home2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.03" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_end_home"
+            android:id="@+id/guideline_end_home2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -155,9 +186,9 @@
             android:id="@+id/childconstraintLayout3_home"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            app:layout_constraintEnd_toStartOf="@id/guideline_end_home"
+            app:layout_constraintEnd_toStartOf="@id/guideline_end_home2"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toEndOf="@id/guideline_start_home">
+            app:layout_constraintStart_toEndOf="@id/guideline_start_home2">
 
             <Space
                 android:id="@+id/spaceX_home"
@@ -257,8 +288,8 @@
             android:id="@+id/spaceB_home"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end_home"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start_home"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end_home2"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start_home2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -267,8 +298,8 @@
             android:layout_height="0dp"
             android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_end_home"
-            app:layout_constraintStart_toStartOf="@+id/guideline_start_home"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_end_home2"
+            app:layout_constraintStart_toStartOf="@+id/guideline_start_home2"
             app:layout_constraintTop_toBottomOf="@+id/spaceB_home" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,7 @@ class Home : Fragment() {
                 if (lunarPhaseIcon != null) {
                     imageView2_home.setImageResource(lunarPhaseIcon)
                 }
-                Text1_home.text = responseSorted[0].weatherDesc
+                Text1_home.text = "天文薄明 : 04:41"//responseSorted[0].weatherDesc
                 Text2_home.text = "日の出 : " + responseSorted[0].sunrise
                 Text3_home.text = "日の入り : " + responseSorted[0].sunset
                 Text4_home.text = "月齢 : " + responseSorted[0].lunarPhase
