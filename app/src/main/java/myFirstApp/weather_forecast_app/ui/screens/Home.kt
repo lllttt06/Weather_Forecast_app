@@ -58,7 +58,7 @@ class Home : Fragment() {
                 textView1_home.text = weatherDescription
                 textView2_home.text = "$temp℃"
 
-                Text1_home.text = "天文薄明 : 04:41"
+                Text1_home.text = "天文薄明 : " + responseSorted[0].twilightTime
                 Text2_home.text = "日の出 : " + responseSorted[0].sunrise
                 Text3_home.text = "日の入り : " + responseSorted[0].sunset
                 Text4_home.text = "月齢 : " + responseSorted[0].lunarPhase

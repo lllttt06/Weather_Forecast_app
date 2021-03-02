@@ -14,5 +14,6 @@ data class ApiResponse(
     var moonset: String,
     var lunarPhase:String,
     var lunarPhaseIcon: String,
-    var weatherDesc: String
+    var weatherDesc: String,
+    var twilightTime: String
 )

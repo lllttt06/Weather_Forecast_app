@@ -56,7 +56,7 @@ class Zao : Fragment() {
 
                 textView1_zao.text = weatherDescriptionZao
                 textView2_zao.text = "$temp℃"
-                Text1_zao.text = responseZaoSorted[0].weatherDesc
+                Text1_zao.text = "天文薄明 : " + responseZaoSorted[0].twilightTime
                 Text2_zao.text = "日の出 : " + responseZaoSorted[0].sunrise
                 Text3_zao.text = "日の入り : " + responseZaoSorted[0].sunset
                 Text4_zao.text = "月齢 : " + responseZaoSorted[0].lunarPhase

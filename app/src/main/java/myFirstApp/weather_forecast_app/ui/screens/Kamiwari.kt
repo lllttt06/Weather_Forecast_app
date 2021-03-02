@@ -58,7 +58,7 @@ class Kamiwari : Fragment() {
 
                 textView1_kamiwari.text = weatherDescriptionKamiwari
                 textView2_kamiwari.text = "$temp℃"
-                Text1_kamiwari.text = responseKamiwariSorted[0].weatherDesc
+                Text1_kamiwari.text = "天文薄明 : " + responseKamiwariSorted[0].twilightTime
                 Text2_kamiwari.text = "日の出 : " + responseKamiwariSorted[0].sunrise
                 Text3_kamiwari.text = "日の入り : " + responseKamiwariSorted[0].sunset
                 Text4_kamiwari.text = "月齢 : " + responseKamiwariSorted[0].lunarPhase
