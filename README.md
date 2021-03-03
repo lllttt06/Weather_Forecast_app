@@ -2,13 +2,7 @@
 "Weather_Forecast_app" is an Android Native app that provides users weather forecast data in Miyagi Pref Japan.
 
 # DEMO
-
-You can learn how to making cute physics simulations (looks retro game).
-
-![](https://cpp-learning.com/wp-content/uploads/2019/05/pyxel-190505-161951.gif)
-
-This animation is a "Cat playing on trampoline"!
-You can get basic skills for making physics simulations.
+![](https://user-images.githubusercontent.com/72681064/109737681-c9f8ae80-7c09-11eb-91ac-4d3b0d6e1781.jpg)
 
 # Features
 
