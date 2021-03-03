@@ -2,7 +2,6 @@
 "Weather_Forecast_app" is an Android Native app that provides users weather forecast data in Miyagi Pref Japan.
 
 # DEMO
-You can see 3 location's weather forecast.
 ![](https://user-images.githubusercontent.com/72681064/109738742-b3ebed80-7c0b-11eb-8f62-8879fcf5fde7.gif)
 
 # Features
