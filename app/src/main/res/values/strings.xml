@@ -2,4 +2,10 @@
     <string name="app_name">Weather_Forecast_app</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="twilight">天文薄明 : </string>
+    <string name="sunrise">日の出 : </string>
+    <string name="sunset">日の入り : </string>
+    <string name="moonrise">月の出 : </string>
+    <string name="moonset">月の入り : </string>
+    <string name="lunarPhase">月齢 : </string>
 </resources>

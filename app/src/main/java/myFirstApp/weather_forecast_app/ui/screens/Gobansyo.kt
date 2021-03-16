@@ -36,11 +36,11 @@ class Gobansyo : Fragment() {
 
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
-        val myPostHome = Post("home")
+        val myPostGobansyo = Post("gobansyo")
 
         viewModelGobansyo = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        viewModelGobansyo.pushPost(myPostHome)
-        viewModelGobansyo.myResponse.observe(this, Observer { response ->
+        viewModelGobansyo.pushPostGobansyo(myPostGobansyo)
+        viewModelGobansyo.myResponseGobansyo.observe(this, Observer { response ->
             if (response.isSuccessful) {
                 val responseGobansyoSorted = response.body()!!.sortedWith(timeComparator)
                 val weatherIcon = IconMap.weatherIconsDetector[responseGobansyoSorted[0].weather]
@@ -60,15 +60,13 @@ class Gobansyo : Fragment() {
                 textView1_gobansyo.text = weatherDescription
                 textView2_gobansyo.text = "$temp℃"
 
-                Text1_gobansyo.text = "天文薄明 : " + responseGobansyoSorted[0].twilightTime
-                Text2_gobansyo.text = "日の出 : " + responseGobansyoSorted[0].sunrise
-                Text3_gobansyo.text = "日の入り : " + responseGobansyoSorted[0].sunset
-                Text4_gobansyo.text = "月齢 : " + responseGobansyoSorted[0].lunarPhase
-                Text5_gobansyo.text = "月の出 : " + responseGobansyoSorted[0].moonrise
-                Text6_gobansyo.text = "月の入り : " + responseGobansyoSorted[0].moonset
+                Text1_gobansyo.text = getString(R.string.twilight) + responseGobansyoSorted[0].twilightTime
+                Text2_gobansyo.text = getString(R.string.sunrise) + responseGobansyoSorted[0].sunrise
+                Text3_gobansyo.text = getString(R.string.sunset) + responseGobansyoSorted[0].sunset
+                Text4_gobansyo.text = getString(R.string.lunarPhase) + responseGobansyoSorted[0].lunarPhase
+                Text5_gobansyo.text = getString(R.string.moonrise) + responseGobansyoSorted[0].moonrise
+                Text6_gobansyo.text = getString(R.string.moonset) + responseGobansyoSorted[0].moonset
 
-            } else {
-                //Toast.makeText(this, response.code(), Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -90,7 +88,7 @@ class Gobansyo : Fragment() {
     }
 
     private fun convertTemp(absoluteTemp: String): String {
-        var relativeTemp = absoluteTemp.toFloat() - 273.15
+        val relativeTemp = absoluteTemp.toFloat() - 273.15 // -273.15 is absolute zero
         return relativeTemp.roundToInt().toString()
     }
 

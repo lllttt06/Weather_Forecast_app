@@ -56,15 +56,13 @@ class Zao : Fragment() {
 
                 textView1_zao.text = weatherDescriptionZao
                 textView2_zao.text = "$temp℃"
-                Text1_zao.text = "天文薄明 : " + responseZaoSorted[0].twilightTime
-                Text2_zao.text = "日の出 : " + responseZaoSorted[0].sunrise
-                Text3_zao.text = "日の入り : " + responseZaoSorted[0].sunset
-                Text4_zao.text = "月齢 : " + responseZaoSorted[0].lunarPhase
-                Text5_zao.text = "月の出 : " + responseZaoSorted[0].moonrise
-                Text6_zao.text = "月の入り : " + responseZaoSorted[0].moonset
+                Text1_zao.text = getString(R.string.twilight) + responseZaoSorted[0].twilightTime
+                Text2_zao.text = getString(R.string.sunrise) + responseZaoSorted[0].sunrise
+                Text3_zao.text = getString(R.string.sunset) + responseZaoSorted[0].sunset
+                Text4_zao.text = getString(R.string.lunarPhase) + responseZaoSorted[0].lunarPhase
+                Text5_zao.text = getString(R.string.moonrise) + responseZaoSorted[0].moonrise
+                Text6_zao.text = getString(R.string.moonset) + responseZaoSorted[0].moonset
 
-            }else {
-                //Toast.makeText(this, responseZao.code(), Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -87,7 +85,7 @@ class Zao : Fragment() {
     }
 
     private fun convertTemp(absoluteTemp: String): String {
-        var relativeTemp = absoluteTemp.toFloat() - 273.15
+        val relativeTemp = absoluteTemp.toFloat() - 273.15 // -273.15 is absolute zero
         return relativeTemp.roundToInt().toString()
     }
 }

@@ -31,8 +31,6 @@ class Kamiwari : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //setupRecyclerview()
-
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         val myPostKamiwari = Post("kamiwari")
@@ -58,15 +56,13 @@ class Kamiwari : Fragment() {
 
                 textView1_kamiwari.text = weatherDescriptionKamiwari
                 textView2_kamiwari.text = "$temp℃"
-                Text1_kamiwari.text = "天文薄明 : " + responseKamiwariSorted[0].twilightTime
-                Text2_kamiwari.text = "日の出 : " + responseKamiwariSorted[0].sunrise
-                Text3_kamiwari.text = "日の入り : " + responseKamiwariSorted[0].sunset
-                Text4_kamiwari.text = "月齢 : " + responseKamiwariSorted[0].lunarPhase
-                Text5_kamiwari.text = "月の出 : " + responseKamiwariSorted[0].moonrise
-                Text6_kamiwari.text = "月の入り : " + responseKamiwariSorted[0].moonset
+                Text1_kamiwari.text = getString(R.string.twilight) + responseKamiwariSorted[0].twilightTime
+                Text2_kamiwari.text = getString(R.string.sunrise) + responseKamiwariSorted[0].sunrise
+                Text3_kamiwari.text = getString(R.string.sunset) + responseKamiwariSorted[0].sunset
+                Text4_kamiwari.text = getString(R.string.lunarPhase) + responseKamiwariSorted[0].lunarPhase
+                Text5_kamiwari.text = getString(R.string.moonrise) + responseKamiwariSorted[0].moonrise
+                Text6_kamiwari.text = getString(R.string.moonset) + responseKamiwariSorted[0].moonset
 
-            }else {
-                //Toast.makeText(this, responseZao.code(), Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -89,7 +85,7 @@ class Kamiwari : Fragment() {
     }
 
     private fun convertTemp(absoluteTemp: String): String {
-        var relativeTemp = absoluteTemp.toFloat() - 273.15
+        val relativeTemp = absoluteTemp.toFloat() - 273.15 // -273.15 is absolute zero
         return relativeTemp.roundToInt().toString()
     }
 }

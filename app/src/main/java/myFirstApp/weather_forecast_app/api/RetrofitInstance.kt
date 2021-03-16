@@ -1,6 +1,6 @@
 package myFirstApp.weather_forecast_app.api
 
-import myFirstApp.weather_forecast_app.utils.Constants.Companion.BASE_URL
+import myFirstApp.weather_forecast_app.utils.Constants.BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    private var gson: Gson? = GsonBuilder()
+    private var gson: Gson = GsonBuilder()
         .setLenient()
         .create()
 

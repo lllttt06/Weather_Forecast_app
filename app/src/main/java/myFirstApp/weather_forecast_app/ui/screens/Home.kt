@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -58,15 +59,13 @@ class Home : Fragment() {
                 textView1_home.text = weatherDescription
                 textView2_home.text = "$temp℃"
 
-                Text1_home.text = "天文薄明 : " + responseSorted[0].twilightTime
-                Text2_home.text = "日の出 : " + responseSorted[0].sunrise
-                Text3_home.text = "日の入り : " + responseSorted[0].sunset
-                Text4_home.text = "月齢 : " + responseSorted[0].lunarPhase
-                Text5_home.text = "月の出 : " + responseSorted[0].moonrise
-                Text6_home.text = "月の入り : " + responseSorted[0].moonset
+                Text1_home.text = getString(R.string.twilight) + responseSorted[0].twilightTime
+                Text2_home.text = getString(R.string.sunrise) + responseSorted[0].sunrise
+                Text3_home.text = getString(R.string.sunset) + responseSorted[0].sunset
+                Text4_home.text = getString(R.string.lunarPhase) + responseSorted[0].lunarPhase
+                Text5_home.text = getString(R.string.moonrise) + responseSorted[0].moonrise
+                Text6_home.text = getString(R.string.moonset) + responseSorted[0].moonset
 
-            } else {
-                //Toast.makeText(this, response.code(), Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -88,7 +87,7 @@ class Home : Fragment() {
     }
 
     private fun convertTemp(absoluteTemp: String): String {
-        var relativeTemp = absoluteTemp.toFloat() - 273.15
+        val relativeTemp = absoluteTemp.toFloat() - 273.15 // -273.15 is absolute zero
         return relativeTemp.roundToInt().toString()
     }
 

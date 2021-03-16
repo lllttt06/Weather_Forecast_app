@@ -1,8 +1,5 @@
 package myFirstApp.weather_forecast_app.utils
 
-class Constants {
-    companion object{
-        const val BASE_URL = "https://sample.amazonaws.com"
-        // this base url is sample
-    }
+object Constants {
+    const val BASE_URL = "https://pbtx6x67vf.execute-api.ap-northeast-1.amazonaws.com/"
 }
