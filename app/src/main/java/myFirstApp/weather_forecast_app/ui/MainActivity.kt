@@ -7,6 +7,7 @@ import myFirstApp.weather_forecast_app.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_Weather_Forecast_app)
         setContentView(R.layout.activity_main)
     }
 }

@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.imageView1_home
 import kotlin.math.roundToInt
 
-class Gobansyo : Fragment() {
+class GobansyoFragment : Fragment() {
     private lateinit var viewModelGobansyo: MainViewModel
     private val myAdapter by lazy { RecyclerViewAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy<ApiResponse> { it.Time.toInt() }

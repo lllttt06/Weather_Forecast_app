@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import myFirstApp.weather_forecast_app.R
 import myFirstApp.weather_forecast_app.myAdapter.ViewPagerAdapter
-import myFirstApp.weather_forecast_app.ui.screens.Home
-import myFirstApp.weather_forecast_app.ui.screens.Kamiwari
-import myFirstApp.weather_forecast_app.ui.screens.Zao
+import myFirstApp.weather_forecast_app.ui.screens.HomeFragment
+import myFirstApp.weather_forecast_app.ui.screens.KamiwariFragment
+import myFirstApp.weather_forecast_app.ui.screens.ZaoFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_view_pager.*
 import kotlinx.android.synthetic.main.fragment_view_pager.view.*
-import myFirstApp.weather_forecast_app.ui.screens.Gobansyo
+import myFirstApp.weather_forecast_app.ui.screens.GobansyoFragment
 
 class ViewPagerFragment : Fragment() {
 
@@ -25,10 +25,10 @@ class ViewPagerFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_view_pager, container, false)
 
         val fragmentList = arrayListOf<Fragment>(
-            Home(),
-            Zao(),
-            Kamiwari(),
-            Gobansyo()
+            HomeFragment(),
+            ZaoFragment(),
+            KamiwariFragment(),
+            GobansyoFragment()
         )
 
         val adapter = ViewPagerAdapter(

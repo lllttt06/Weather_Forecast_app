@@ -22,7 +22,7 @@ import myFirstApp.weather_forecast_app.utils.IconMap
 import kotlinx.android.synthetic.main.fragment_kamiwari.*
 import kotlin.math.roundToInt
 
-class Kamiwari : Fragment() {
+class KamiwariFragment : Fragment() {
     private lateinit var viewModelKamiwari: MainViewModel
     private val myAdapter by lazy { RecyclerViewAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy<ApiResponse> { it.Time.toInt() }

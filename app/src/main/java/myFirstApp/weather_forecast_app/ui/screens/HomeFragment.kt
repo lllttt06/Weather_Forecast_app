@@ -23,7 +23,7 @@ import myFirstApp.weather_forecast_app.utils.IconMap
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlin.math.roundToInt
 
-class Home : Fragment() {
+class HomeFragment : Fragment() {
     private lateinit var viewModelHome: MainViewModel
     private val myAdapter by lazy { RecyclerViewAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy<ApiResponse> { it.Time.toInt() }
@@ -43,7 +43,8 @@ class Home : Fragment() {
             if (response.isSuccessful) {
                 val responseSorted = response.body()!!.sortedWith(timeComparator)
                 val weatherIcon = IconMap.weatherIconsDetector[responseSorted[0].weather]
-                val weatherDescription = IconMap.weatherDescriptionDetector[responseSorted[0].weather]
+                val weatherDescription =
+                    IconMap.weatherDescriptionDetector[responseSorted[0].weather]
                 val lunarPhaseIcon = IconMap.lunarPhaseDetector[responseSorted[0].lunarPhaseIcon]
                 val temp = convertTemp(responseSorted[0].temp)
 
