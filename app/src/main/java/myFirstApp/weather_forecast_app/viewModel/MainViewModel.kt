@@ -8,7 +8,6 @@ import myFirstApp.weather_forecast_app.model.ApiResponse
 import myFirstApp.weather_forecast_app.model.Post
 import myFirstApp.weather_forecast_app.repository.Repository
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 class MainViewModel(private val repository: Repository): ViewModel()  {
