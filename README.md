@@ -11,11 +11,20 @@ You can download this app here(https://play.google.com/store/apps/details?id=myF
 This app can display not only usual weather forecast but lunar phase, twilight, sunset, sunrise, moonset, moonrise time and clouds fraction.
 These info is useful for star gazers.
 
-# Requirement
+# Environment
 
 * Android Studio 4.1.2
 * kotlin 1.4.21
-* AWS account
+* AWS API Gateway
+* AWS Lambda
+* Amazon DynamoDB
+
+# Libraries
+
+* Retrofit2
+* Coroutine
+* RecyclerView
+* ViewPager2
 
 
 # Author
