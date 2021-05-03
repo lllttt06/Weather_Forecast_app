@@ -8,4 +8,6 @@
     <string name="moonrise">月の出 : </string>
     <string name="moonset">月の入り : </string>
     <string name="lunarPhase">月齢 : </string>
+    <string name="reload_text">通信エラーが発生しました。再度読み込むためには、リロードボタンをクリックしてください。</string>
+    <string name="reload">リロード</string>
 </resources>

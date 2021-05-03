@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.Weather_Forecast_app" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/transparent</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
@@ -20,7 +20,7 @@
 
     <style name="Theme.Weather_Forecast_app.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/blue</item>
         <item name="colorPrimaryVariant">@color/transparent</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->

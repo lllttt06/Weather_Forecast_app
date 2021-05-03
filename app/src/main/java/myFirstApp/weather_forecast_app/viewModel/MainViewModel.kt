@@ -13,53 +13,18 @@ import retrofit2.Response
 
 class MainViewModel(private val repository: Repository): ViewModel()  {
     var myResponse: MutableLiveData<Response<List<ApiResponse>>> = MutableLiveData()
-    var myResponseZao: MutableLiveData<Response<List<ApiResponse>>> = MutableLiveData()
-    var myResponseKamiwari: MutableLiveData<Response<List<ApiResponse>>> = MutableLiveData()
-    var myResponseGobansyo: MutableLiveData<Response<List<ApiResponse>>> = MutableLiveData()
+    var isResponseSuccessful: MutableLiveData<Boolean> = MutableLiveData()
 
     fun pushPost(post: Post) {
         viewModelScope.launch {
             try {
                 val response = repository.pushPost(post)
                 myResponse.value = response
+                isResponseSuccessful.value = true
             } catch (e: Throwable) {
                 Log.v("error", e.toString())
+                isResponseSuccessful.value = false
             }
         }
     }
-
-    fun pushPostZao(post: Post) {
-        viewModelScope.launch {
-            try {
-                val responseZao = repository.pushPost(post)
-                myResponseZao.value = responseZao
-            } catch (e: Throwable) {
-                Log.v("error", e.toString())
-            }
-        }
-    }
-
-    fun pushPostKamiwari(post: Post) {
-        viewModelScope.launch {
-            try {
-                val responseKamiwari = repository.pushPost(post)
-                myResponseKamiwari.value = responseKamiwari
-            } catch (e: Throwable) {
-                Log.v("error", e.toString())
-            }
-        }
-    }
-
-    fun pushPostGobansyo(post: Post) {
-        viewModelScope.launch {
-            try {
-                val responseGobansyo = repository.pushPost(post)
-                myResponseGobansyo.value = responseGobansyo
-            } catch (e: Throwable) {
-                Log.v("error", e.toString())
-            }
-        }
-    }
-
-
 }

@@ -24,7 +24,7 @@ class ViewPagerFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_view_pager, container, false)
 
-        val fragmentList = arrayListOf<Fragment>(
+        val fragmentList = arrayListOf(
             HomeFragment(),
             ZaoFragment(),
             KamiwariFragment(),
@@ -46,7 +46,7 @@ class ViewPagerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
-        val locationList = listOf<String>("仙台", "蔵王山", "神割崎", "御番所公園")
+        val locationList = listOf("仙台", "蔵王山", "神割崎", "御番所公園")
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = locationList[position]
         }.attach()
