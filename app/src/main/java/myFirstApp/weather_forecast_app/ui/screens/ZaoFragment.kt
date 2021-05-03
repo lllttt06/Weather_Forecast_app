@@ -2,30 +2,28 @@ package myFirstApp.weather_forecast_app.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import myFirstApp.weather_forecast_app.viewModel.MainViewModel
-import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
+import kotlinx.android.synthetic.main.fragment_zao.*
 import myFirstApp.weather_forecast_app.R
 import myFirstApp.weather_forecast_app.model.ApiResponse
 import myFirstApp.weather_forecast_app.model.Post
 import myFirstApp.weather_forecast_app.myAdapter.RecyclerViewAdapter
 import myFirstApp.weather_forecast_app.repository.Repository
 import myFirstApp.weather_forecast_app.utils.IconMap
-import kotlinx.android.synthetic.main.fragment_zao.*
+import myFirstApp.weather_forecast_app.viewModel.MainViewModel
+import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
 import kotlin.math.roundToInt
 
-class Zao : Fragment() {
-    private lateinit var viewModelZao: MainViewModel
+class ZaoFragment : Fragment() {
     private val myAdapter by lazy { RecyclerViewAdapter() }
-    private val timeComparator: Comparator<ApiResponse> = compareBy<ApiResponse> { it.Time.toInt() }
+    private val timeComparator: Comparator<ApiResponse> = compareBy { it.Time.toInt() }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,15 +32,17 @@ class Zao : Fragment() {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         val myPostZao = Post("zao")
+        val viewModelZao = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        viewModelZao = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        viewModelZao.pushPostZao(myPostZao)
-        viewModelZao.myResponseZao.observe(this, Observer { responseZao ->
-            if(responseZao.isSuccessful){
+        viewModelZao.pushPost(myPostZao)
+        viewModelZao.myResponse.observe(this, { responseZao ->
+            if (responseZao.isSuccessful) {
                 val responseZaoSorted = responseZao.body()!!.sortedWith(timeComparator)
                 val weatherIconZao = IconMap.weatherIconsDetector[responseZaoSorted[0].weather]
-                val weatherDescriptionZao = IconMap.weatherDescriptionDetector[responseZaoSorted[0].weather]
-                val lunarPhaseIconZao = IconMap.lunarPhaseDetector[responseZaoSorted[0].lunarPhaseIcon]
+                val weatherDescriptionZao =
+                    IconMap.weatherDescriptionDetector[responseZaoSorted[0].weather]
+                val lunarPhaseIconZao =
+                    IconMap.lunarPhaseDetector[responseZaoSorted[0].lunarPhaseIcon]
                 val temp = convertTemp(responseZaoSorted[0].temp)
 
                 responseZaoSorted.let { myAdapter.setData(it) }

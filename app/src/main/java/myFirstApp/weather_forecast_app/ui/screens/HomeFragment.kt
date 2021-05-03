@@ -2,48 +2,64 @@ package myFirstApp.weather_forecast_app.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import myFirstApp.weather_forecast_app.viewModel.MainViewModel
-import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
+import kotlinx.android.synthetic.main.fragment_home.*
 import myFirstApp.weather_forecast_app.R
 import myFirstApp.weather_forecast_app.model.ApiResponse
 import myFirstApp.weather_forecast_app.model.Post
 import myFirstApp.weather_forecast_app.myAdapter.RecyclerViewAdapter
 import myFirstApp.weather_forecast_app.repository.Repository
 import myFirstApp.weather_forecast_app.utils.IconMap
-import kotlinx.android.synthetic.main.fragment_home.*
+import myFirstApp.weather_forecast_app.viewModel.MainViewModel
+import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
 import kotlin.math.roundToInt
 
-class Home : Fragment() {
-    private lateinit var viewModelHome: MainViewModel
-    private val myAdapter by lazy { RecyclerViewAdapter() }
-    private val timeComparator: Comparator<ApiResponse> = compareBy<ApiResponse> { it.Time.toInt() }
 
+class HomeFragment : Fragment() {
+    private val myAdapter by lazy { RecyclerViewAdapter() }
+    private val timeComparator: Comparator<ApiResponse> = compareBy { it.Time.toInt() }
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val viewHome = inflater.inflate(R.layout.fragment_home, container, false)
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         val myPostHome = Post("home")
+        val viewModelHome = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        viewModelHome = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         viewModelHome.pushPost(myPostHome)
-        viewModelHome.myResponse.observe(this, Observer { response ->
+        viewModelHome.isResponseSuccessful.observe(viewLifecycleOwner, {
+            if (it == false) {
+                val sampleFragment = SampleFragment()
+                val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+                transaction.addToBackStack(null)
+                transaction.replace(R.id.fragment_container, sampleFragment)
+                transaction.commit()
+            }
+        })
+        viewModelHome.myResponse.observe(this, { response ->
             if (response.isSuccessful) {
                 val responseSorted = response.body()!!.sortedWith(timeComparator)
                 val weatherIcon = IconMap.weatherIconsDetector[responseSorted[0].weather]
-                val weatherDescription = IconMap.weatherDescriptionDetector[responseSorted[0].weather]
+                val weatherDescription =
+                    IconMap.weatherDescriptionDetector[responseSorted[0].weather]
                 val lunarPhaseIcon = IconMap.lunarPhaseDetector[responseSorted[0].lunarPhaseIcon]
                 val temp = convertTemp(responseSorted[0].temp)
 
@@ -68,20 +84,8 @@ class Home : Fragment() {
 
             }
         })
-    }
+        setRecyclerView(viewHome)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val viewHome = inflater.inflate(R.layout.fragment_home, container, false)
-        val recyclerViewHome = viewHome.findViewById<RecyclerView>(R.id.recyclerView_home)
-        val linearLayoutManager = LinearLayoutManager(viewHome.context)
-        val itemDecoration = DividerItemDecoration(viewHome.context, DividerItemDecoration.VERTICAL)
-
-        recyclerViewHome.adapter = myAdapter
-        recyclerViewHome.layoutManager = linearLayoutManager
-        recyclerViewHome.addItemDecoration(itemDecoration)
 
         return viewHome
     }
@@ -89,6 +93,16 @@ class Home : Fragment() {
     private fun convertTemp(absoluteTemp: String): String {
         val relativeTemp = absoluteTemp.toFloat() - 273.15 // -273.15 is absolute zero
         return relativeTemp.roundToInt().toString()
+    }
+
+    private fun setRecyclerView(viewHome: View) {
+        val recyclerViewHome = viewHome.findViewById<RecyclerView>(R.id.recyclerView_home)
+        val linearLayoutManager = LinearLayoutManager(viewHome.context)
+        val itemDecoration = DividerItemDecoration(viewHome.context, DividerItemDecoration.VERTICAL)
+
+        recyclerViewHome.adapter = myAdapter
+        recyclerViewHome.layoutManager = linearLayoutManager
+        recyclerViewHome.addItemDecoration(itemDecoration)
     }
 
 }
