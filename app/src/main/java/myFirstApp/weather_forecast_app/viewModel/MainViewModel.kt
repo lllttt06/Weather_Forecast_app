@@ -1,5 +1,6 @@
 package myFirstApp.weather_forecast_app.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,29 +19,45 @@ class MainViewModel(private val repository: Repository): ViewModel()  {
 
     fun pushPost(post: Post) {
         viewModelScope.launch {
-            val response = repository.pushPost(post)
-            myResponse.value = response
+            try {
+                val response = repository.pushPost(post)
+                myResponse.value = response
+            } catch (e: Throwable) {
+                Log.v("error", e.toString())
+            }
         }
     }
 
     fun pushPostZao(post: Post) {
         viewModelScope.launch {
-            val responseZao = repository.pushPost(post)
-            myResponseZao.value = responseZao
+            try {
+                val responseZao = repository.pushPost(post)
+                myResponseZao.value = responseZao
+            } catch (e: Throwable) {
+                Log.v("error", e.toString())
+            }
         }
     }
 
     fun pushPostKamiwari(post: Post) {
         viewModelScope.launch {
-            val responseKamiwari = repository.pushPost(post)
-            myResponseKamiwari.value = responseKamiwari
+            try {
+                val responseKamiwari = repository.pushPost(post)
+                myResponseKamiwari.value = responseKamiwari
+            } catch (e: Throwable) {
+                Log.v("error", e.toString())
+            }
         }
     }
 
     fun pushPostGobansyo(post: Post) {
         viewModelScope.launch {
-            val responseGobansyo = repository.pushPost(post)
-            myResponseGobansyo.value = responseGobansyo
+            try {
+                val responseGobansyo = repository.pushPost(post)
+                myResponseGobansyo.value = responseGobansyo
+            } catch (e: Throwable) {
+                Log.v("error", e.toString())
+            }
         }
     }
 

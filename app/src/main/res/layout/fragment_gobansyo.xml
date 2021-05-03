@@ -272,7 +272,7 @@
                 android:id="@+id/index4_gobansyo"
                 android:layout_width="35dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="10dp"
                 android:gravity="center"
                 android:text="雲量[%]"
                 android:textSize="15sp"
@@ -285,12 +285,14 @@
                 android:id="@+id/index5_gobansyo"
                 android:layout_width="45dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
                 android:gravity="center"
                 android:text="風速[m/s]"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/index6_gobansyo"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 tools:ignore="MissingConstraints" />
 
             <TextView
