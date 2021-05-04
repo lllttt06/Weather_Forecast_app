@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ import myFirstApp.weather_forecast_app.viewModel.MainViewModel
 import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
 import kotlin.math.roundToInt
 
+
 class ZaoFragment : Fragment() {
     private val myAdapter by lazy { RecyclerViewAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy { it.Time.toInt() }
@@ -29,63 +31,78 @@ class ZaoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository)
-        val myPostZao = Post("zao")
-        val viewModelZao = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-
-        viewModelZao.pushPost(myPostZao)
-        viewModelZao.myResponse.observe(this, { responseZao ->
-            if (responseZao.isSuccessful) {
-                val responseZaoSorted = responseZao.body()!!.sortedWith(timeComparator)
-                val weatherIconZao = IconMap.weatherIconsDetector[responseZaoSorted[0].weather]
-                val weatherDescriptionZao =
-                    IconMap.weatherDescriptionDetector[responseZaoSorted[0].weather]
-                val lunarPhaseIconZao =
-                    IconMap.lunarPhaseDetector[responseZaoSorted[0].lunarPhaseIcon]
-                val temp = convertTemp(responseZaoSorted[0].temp)
-
-                responseZaoSorted.let { myAdapter.setData(it) }
-
-                if (weatherIconZao != null) {
-                    imageView1_zao.setImageResource(weatherIconZao)
-                }
-                if (lunarPhaseIconZao != null) {
-                    imageView2_zao.setImageResource(lunarPhaseIconZao)
-                }
-
-                textView1_zao.text = weatherDescriptionZao
-                textView2_zao.text = "$temp℃"
-                Text1_zao.text = getString(R.string.twilight) + responseZaoSorted[0].twilightTime
-                Text2_zao.text = getString(R.string.sunrise) + responseZaoSorted[0].sunrise
-                Text3_zao.text = getString(R.string.sunset) + responseZaoSorted[0].sunset
-                Text4_zao.text = getString(R.string.lunarPhase) + responseZaoSorted[0].lunarPhase
-                Text5_zao.text = getString(R.string.moonrise) + responseZaoSorted[0].moonrise
-                Text6_zao.text = getString(R.string.moonset) + responseZaoSorted[0].moonset
-
-            }
-        })
-
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val viewZao = inflater.inflate(R.layout.fragment_zao, container, false)
-        val recyclerViewZao = viewZao.findViewById<RecyclerView>(R.id.recyclerView_zao)
-        val linearLayoutManager = LinearLayoutManager(viewZao.context)
-        val itemDecoration = DividerItemDecoration(viewZao.context, DividerItemDecoration.VERTICAL)
+        val view = inflater.inflate(R.layout.fragment_zao, container, false)
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        val myPost = Post("zao")
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        recyclerViewZao.adapter = myAdapter
-        recyclerViewZao.layoutManager = linearLayoutManager
-        recyclerViewZao.addItemDecoration(itemDecoration)
+        viewModel.pushPost(myPost)
+        viewModel.isResponseSuccessful.observe(viewLifecycleOwner, {
+            if (it == false) {
+                val sampleFragment = SampleFragment()
+                val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+                transaction.addToBackStack(null)
+                transaction.replace(R.id.fragment_container, sampleFragment)
+                transaction.commit()
+            }
+        })
+        viewModel.myResponse.observe(this, { response ->
+            if (response.isSuccessful) {
+                val responseSorted = response.body()!!.sortedWith(timeComparator)
+                val weatherIcon = IconMap.weatherIconsDetector[responseSorted[0].weather]
+                val weatherDescription =
+                    IconMap.weatherDescriptionDetector[responseSorted[0].weather]
+                val lunarPhaseIcon = IconMap.lunarPhaseDetector[responseSorted[0].lunarPhaseIcon]
+                val temp = convertTemp(responseSorted[0].temp)
 
-        return viewZao
+                responseSorted.let { myAdapter.setData(it) }
+
+                if (weatherIcon != null) {
+                    imageView1_zao.setImageResource(weatherIcon)
+                }
+                if (lunarPhaseIcon != null) {
+                    imageView2_zao.setImageResource(lunarPhaseIcon)
+                }
+
+                textView1_zao.text = weatherDescription
+                textView2_zao.text = "$temp℃"
+
+                Text1_zao.text = getString(R.string.twilight) + responseSorted[0].twilightTime
+                Text2_zao.text = getString(R.string.sunrise) + responseSorted[0].sunrise
+                Text3_zao.text = getString(R.string.sunset) + responseSorted[0].sunset
+                Text4_zao.text = getString(R.string.lunarPhase) + responseSorted[0].lunarPhase
+                Text5_zao.text = getString(R.string.moonrise) + responseSorted[0].moonrise
+                Text6_zao.text = getString(R.string.moonset) + responseSorted[0].moonset
+
+            }
+        })
+        setRecyclerView(view)
+
+
+        return view
     }
 
     private fun convertTemp(absoluteTemp: String): String {
         val relativeTemp = absoluteTemp.toFloat() - 273.15 // -273.15 is absolute zero
         return relativeTemp.roundToInt().toString()
     }
+
+    private fun setRecyclerView(view: View) {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView_zao)
+        val linearLayoutManager = LinearLayoutManager(view.context)
+        val itemDecoration = DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL)
+
+        recyclerView.adapter = myAdapter
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.addItemDecoration(itemDecoration)
+    }
+
 }

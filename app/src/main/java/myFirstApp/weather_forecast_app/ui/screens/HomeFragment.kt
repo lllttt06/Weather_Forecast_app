@@ -38,14 +38,14 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val viewHome = inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
-        val myPostHome = Post("home")
-        val viewModelHome = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        val myPost = Post("home")
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        viewModelHome.pushPost(myPostHome)
-        viewModelHome.isResponseSuccessful.observe(viewLifecycleOwner, {
+        viewModel.pushPost(myPost)
+        viewModel.isResponseSuccessful.observe(viewLifecycleOwner, {
             if (it == false) {
                 val sampleFragment = SampleFragment()
                 val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
                 transaction.commit()
             }
         })
-        viewModelHome.myResponse.observe(this, { response ->
+        viewModel.myResponse.observe(this, { response ->
             if (response.isSuccessful) {
                 val responseSorted = response.body()!!.sortedWith(timeComparator)
                 val weatherIcon = IconMap.weatherIconsDetector[responseSorted[0].weather]
@@ -84,10 +84,10 @@ class HomeFragment : Fragment() {
 
             }
         })
-        setRecyclerView(viewHome)
+        setRecyclerView(view)
 
 
-        return viewHome
+        return view
     }
 
     private fun convertTemp(absoluteTemp: String): String {
@@ -95,14 +95,14 @@ class HomeFragment : Fragment() {
         return relativeTemp.roundToInt().toString()
     }
 
-    private fun setRecyclerView(viewHome: View) {
-        val recyclerViewHome = viewHome.findViewById<RecyclerView>(R.id.recyclerView_home)
-        val linearLayoutManager = LinearLayoutManager(viewHome.context)
-        val itemDecoration = DividerItemDecoration(viewHome.context, DividerItemDecoration.VERTICAL)
+    private fun setRecyclerView(view: View) {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView_home)
+        val linearLayoutManager = LinearLayoutManager(view.context)
+        val itemDecoration = DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL)
 
-        recyclerViewHome.adapter = myAdapter
-        recyclerViewHome.layoutManager = linearLayoutManager
-        recyclerViewHome.addItemDecoration(itemDecoration)
+        recyclerView.adapter = myAdapter
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.addItemDecoration(itemDecoration)
     }
 
 }

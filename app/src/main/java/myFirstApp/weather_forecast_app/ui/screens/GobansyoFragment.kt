@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,33 +22,48 @@ import myFirstApp.weather_forecast_app.viewModel.MainViewModel
 import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
 import kotlin.math.roundToInt
 
+
 class GobansyoFragment : Fragment() {
     private val myAdapter by lazy { RecyclerViewAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy { it.Time.toInt() }
-
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view = inflater.inflate(R.layout.fragment_gobansyo, container, false)
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
-        val myPostGobansyo = Post("gobansyo")
-        val viewModelGobansyo =
-            ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        val myPost = Post("gobansyo")
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
 
-        viewModelGobansyo.pushPost(myPostGobansyo)
-        viewModelGobansyo.myResponse.observe(this, { response ->
+        viewModel.pushPost(myPost)
+        viewModel.isResponseSuccessful.observe(viewLifecycleOwner, {
+            if (it == false) {
+                val sampleFragment = SampleFragment()
+                val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
+                transaction.addToBackStack(null)
+                transaction.replace(R.id.fragment_container, sampleFragment)
+                transaction.commit()
+            }
+        })
+        viewModel.myResponse.observe(this, { response ->
             if (response.isSuccessful) {
-                val responseGobansyoSorted = response.body()!!.sortedWith(timeComparator)
-                val weatherIcon = IconMap.weatherIconsDetector[responseGobansyoSorted[0].weather]
+                val responseSorted = response.body()!!.sortedWith(timeComparator)
+                val weatherIcon = IconMap.weatherIconsDetector[responseSorted[0].weather]
                 val weatherDescription =
-                    IconMap.weatherDescriptionDetector[responseGobansyoSorted[0].weather]
-                val lunarPhaseIcon =
-                    IconMap.lunarPhaseDetector[responseGobansyoSorted[0].lunarPhaseIcon]
-                val temp = convertTemp(responseGobansyoSorted[0].temp)
+                    IconMap.weatherDescriptionDetector[responseSorted[0].weather]
+                val lunarPhaseIcon = IconMap.lunarPhaseDetector[responseSorted[0].lunarPhaseIcon]
+                val temp = convertTemp(responseSorted[0].temp)
 
-                responseGobansyoSorted.let { myAdapter.setData(it) }
+                responseSorted.let { myAdapter.setData(it) }
 
                 if (weatherIcon != null) {
                     imageView1_gobansyo.setImageResource(weatherIcon)
@@ -59,43 +75,34 @@ class GobansyoFragment : Fragment() {
                 textView1_gobansyo.text = weatherDescription
                 textView2_gobansyo.text = "$temp℃"
 
-                Text1_gobansyo.text =
-                    getString(R.string.twilight) + responseGobansyoSorted[0].twilightTime
-                Text2_gobansyo.text =
-                    getString(R.string.sunrise) + responseGobansyoSorted[0].sunrise
-                Text3_gobansyo.text = getString(R.string.sunset) + responseGobansyoSorted[0].sunset
-                Text4_gobansyo.text =
-                    getString(R.string.lunarPhase) + responseGobansyoSorted[0].lunarPhase
-                Text5_gobansyo.text =
-                    getString(R.string.moonrise) + responseGobansyoSorted[0].moonrise
-                Text6_gobansyo.text =
-                    getString(R.string.moonset) + responseGobansyoSorted[0].moonset
+                Text1_gobansyo.text = getString(R.string.twilight) + responseSorted[0].twilightTime
+                Text2_gobansyo.text = getString(R.string.sunrise) + responseSorted[0].sunrise
+                Text3_gobansyo.text = getString(R.string.sunset) + responseSorted[0].sunset
+                Text4_gobansyo.text = getString(R.string.lunarPhase) + responseSorted[0].lunarPhase
+                Text5_gobansyo.text = getString(R.string.moonrise) + responseSorted[0].moonrise
+                Text6_gobansyo.text = getString(R.string.moonset) + responseSorted[0].moonset
 
             }
         })
-    }
+        setRecyclerView(view)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val viewGobansyo = inflater.inflate(R.layout.fragment_gobansyo, container, false)
-        val recyclerViewGobansyo =
-            viewGobansyo.findViewById<RecyclerView>(R.id.recyclerView_gobansyo)
-        val linearLayoutManager = LinearLayoutManager(viewGobansyo.context)
-        val itemDecoration =
-            DividerItemDecoration(viewGobansyo.context, DividerItemDecoration.VERTICAL)
 
-        recyclerViewGobansyo.adapter = myAdapter
-        recyclerViewGobansyo.layoutManager = linearLayoutManager
-        recyclerViewGobansyo.addItemDecoration(itemDecoration)
-
-        return viewGobansyo
+        return view
     }
 
     private fun convertTemp(absoluteTemp: String): String {
         val relativeTemp = absoluteTemp.toFloat() - 273.15 // -273.15 is absolute zero
         return relativeTemp.roundToInt().toString()
+    }
+
+    private fun setRecyclerView(view: View) {
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView_gobansyo)
+        val linearLayoutManager = LinearLayoutManager(view.context)
+        val itemDecoration = DividerItemDecoration(view.context, DividerItemDecoration.VERTICAL)
+
+        recyclerView.adapter = myAdapter
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.addItemDecoration(itemDecoration)
     }
 
 }
