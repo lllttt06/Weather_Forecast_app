@@ -47,7 +47,7 @@ class KamiwariFragment : Fragment() {
         viewModel.pushPost(myPost)
         viewModel.isResponseSuccessful.observe(viewLifecycleOwner, {
             if (it == false) {
-                val sampleFragment = SampleFragment()
+                val sampleFragment = ReloadFragment()
                 val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
                 transaction.addToBackStack(null)
                 transaction.replace(R.id.fragment_container, sampleFragment)
