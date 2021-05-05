@@ -1,6 +1,5 @@
 package myFirstApp.weather_forecast_app.ui.screens
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,88 +10,54 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.fragment_zao.*
 import myFirstApp.weather_forecast_app.R
+import myFirstApp.weather_forecast_app.databinding.FragmentZaoBinding
 import myFirstApp.weather_forecast_app.model.ApiResponse
 import myFirstApp.weather_forecast_app.model.Post
 import myFirstApp.weather_forecast_app.myAdapter.RecyclerViewAdapter
 import myFirstApp.weather_forecast_app.repository.Repository
-import myFirstApp.weather_forecast_app.utils.IconMap
 import myFirstApp.weather_forecast_app.viewModel.MainViewModel
 import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
-import kotlin.math.roundToInt
 
 
 class ZaoFragment : Fragment() {
     private val myAdapter by lazy { RecyclerViewAdapter() }
     private val timeComparator: Comparator<ApiResponse> = compareBy { it.Time.toInt() }
+    private lateinit var binding: FragmentZaoBinding
 
-    @SuppressLint("SetTextI18n")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_zao, container, false)
+    ): View {
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
-        val myPost = Post("zao")
         val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        binding = FragmentZaoBinding.inflate(inflater, container, false)
+        binding.vm = viewModel
+        binding.lifecycleOwner = this
 
-        viewModel.pushPost(myPost)
+        viewModel.pushPost(Post("zao"))
+
         viewModel.isResponseSuccessful.observe(viewLifecycleOwner, {
             if (it == false) {
-                val sampleFragment = SampleFragment()
+                val sampleFragment = ReloadFragment()
                 val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
-                transaction.addToBackStack(null)
-                transaction.replace(R.id.fragment_container, sampleFragment)
-                transaction.commit()
+                transaction
+                    .addToBackStack(null)
+                    .replace(R.id.fragment_container, sampleFragment)
+                    .commit()
             }
         })
+
         viewModel.myResponse.observe(this, { response ->
             if (response.isSuccessful) {
                 val responseSorted = response.body()!!.sortedWith(timeComparator)
-                val weatherIcon = IconMap.weatherIconsDetector[responseSorted[0].weather]
-                val weatherDescription =
-                    IconMap.weatherDescriptionDetector[responseSorted[0].weather]
-                val lunarPhaseIcon = IconMap.lunarPhaseDetector[responseSorted[0].lunarPhaseIcon]
-                val temp = convertTemp(responseSorted[0].temp)
-
                 responseSorted.let { myAdapter.setData(it) }
-
-                if (weatherIcon != null) {
-                    imageView1_zao.setImageResource(weatherIcon)
-                }
-                if (lunarPhaseIcon != null) {
-                    imageView2_zao.setImageResource(lunarPhaseIcon)
-                }
-
-                textView1_zao.text = weatherDescription
-                textView2_zao.text = "$temp℃"
-
-                Text1_zao.text = getString(R.string.twilight) + responseSorted[0].twilightTime
-                Text2_zao.text = getString(R.string.sunrise) + responseSorted[0].sunrise
-                Text3_zao.text = getString(R.string.sunset) + responseSorted[0].sunset
-                Text4_zao.text = getString(R.string.lunarPhase) + responseSorted[0].lunarPhase
-                Text5_zao.text = getString(R.string.moonrise) + responseSorted[0].moonrise
-                Text6_zao.text = getString(R.string.moonset) + responseSorted[0].moonset
-
             }
         })
-        setRecyclerView(view)
 
-
-        return view
-    }
-
-    private fun convertTemp(absoluteTemp: String): String {
-        val relativeTemp = absoluteTemp.toFloat() - 273.15 // -273.15 is absolute zero
-        return relativeTemp.roundToInt().toString()
+        setRecyclerView(binding.root)
+        return binding.root
     }
 
     private fun setRecyclerView(view: View) {

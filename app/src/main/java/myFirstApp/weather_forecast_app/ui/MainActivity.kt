@@ -14,7 +14,8 @@ class MainActivity : AppCompatActivity() {
 
         val viewPagerFragment = ViewPagerFragment()
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.fragment_container, viewPagerFragment)
-        transaction.commit()
+        transaction
+            .add(R.id.fragment_container, viewPagerFragment)
+            .commit()
     }
 }

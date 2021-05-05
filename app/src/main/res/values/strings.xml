@@ -8,6 +8,13 @@
     <string name="moonrise">月の出 : </string>
     <string name="moonset">月の入り : </string>
     <string name="lunarPhase">月齢 : </string>
-    <string name="reload_text">通信エラーが発生しました。再度読み込むためには、リロードボタンをクリックしてください。</string>
+    <string name="error_text">通信エラーが発生しました</string>
     <string name="reload">リロード</string>
+    <string name="time">時刻</string>
+    <string name="weather">天気</string>
+    <string name="temperature">気温[℃]</string>
+    <string name="cloud_fraction">雲量[%]</string>
+    <string name="wind_speed">風速[m/s]</string>
+    <string name="humidity">湿度[%]</string>
+    <string name="check_network">ネットワーク接続を確認してください</string>
 </resources>
