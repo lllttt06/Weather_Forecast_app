@@ -6,9 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_reload.view.*
 import myFirstApp.weather_forecast_app.R
+import myFirstApp.weather_forecast_app.model.Post
+import myFirstApp.weather_forecast_app.repository.Repository
 import myFirstApp.weather_forecast_app.ui.ViewPagerFragment
+import myFirstApp.weather_forecast_app.viewModel.MainViewModel
+import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
 
 class ReloadFragment : Fragment() {
 
@@ -21,13 +26,21 @@ class ReloadFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+
         view.reload_button.setOnClickListener {
+            viewModel.pushPost(Post("home"))
             val viewPagerFragment = ViewPagerFragment()
             val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
-            transaction
-                .addToBackStack(null)
-                .replace(R.id.fragment_container, viewPagerFragment)
-                .commit()
+
+            if (viewModel.isResponseSuccessful.value == true) {
+                transaction
+                    .addToBackStack(null)
+                    .replace(R.id.fragment_container, viewPagerFragment)
+                    .commit()
+            }
         }
     }
 

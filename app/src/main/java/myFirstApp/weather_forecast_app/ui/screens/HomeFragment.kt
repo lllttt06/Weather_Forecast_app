@@ -22,23 +22,24 @@ import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
 
 class HomeFragment : Fragment() {
     private val myAdapter by lazy { RecyclerViewAdapter() }
-    private val timeComparator: Comparator<ApiResponse> = compareBy { it.Time.toInt() }
-    private lateinit var binding: FragmentHomeBinding
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val timeComparator: Comparator<ApiResponse> = compareBy { it.Time.toInt() }
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
         binding.vm = viewModel
         binding.lifecycleOwner = this
 
         viewModel.pushPost(Post("home"))
-
-        viewModel.isResponseSuccessful.observe(viewLifecycleOwner, {
+        viewModel.isResponseSuccessful.observe(this, {
             if (it == false) {
                 val sampleFragment = ReloadFragment()
                 val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
@@ -48,7 +49,6 @@ class HomeFragment : Fragment() {
                     .commit()
             }
         })
-
         viewModel.myResponse.observe(this, { response ->
             if (response.isSuccessful) {
                 val responseSorted = response.body()!!.sortedWith(timeComparator)
