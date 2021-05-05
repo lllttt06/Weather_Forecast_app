@@ -25,6 +25,8 @@ These info is useful for star gazers.
 * Coroutine
 * RecyclerView
 * ViewPager2
+* LiveData
+* Databinding
 
 
 # Author
