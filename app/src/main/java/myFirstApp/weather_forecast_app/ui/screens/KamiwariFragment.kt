@@ -22,17 +22,16 @@ import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
 
 class KamiwariFragment : Fragment() {
     private val myAdapter by lazy { RecyclerViewAdapter() }
-    private val timeComparator: Comparator<ApiResponse> = compareBy { it.Time.toInt() }
-    private lateinit var binding: FragmentKamiwariBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val timeComparator: Comparator<ApiResponse> = compareBy { it.Time.toInt() }
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
-        binding = FragmentKamiwariBinding.inflate(inflater, container, false)
+        val binding = FragmentKamiwariBinding.inflate(inflater, container, false)
         binding.vm = viewModel
         binding.lifecycleOwner = this
 

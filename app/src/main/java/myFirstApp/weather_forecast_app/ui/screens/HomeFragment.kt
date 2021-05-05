@@ -23,8 +23,6 @@ import myFirstApp.weather_forecast_app.viewModel.MainViewModelFactory
 class HomeFragment : Fragment() {
     private val myAdapter by lazy { RecyclerViewAdapter() }
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

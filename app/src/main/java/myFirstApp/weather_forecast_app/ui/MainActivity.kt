@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_Weather_Forecast_app)
         setContentView(R.layout.activity_main)
 
-        val viewPagerFragment = ViewPagerFragment()
+        val viewPagerFragment = MapsFragment()
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction
             .add(R.id.fragment_container, viewPagerFragment)
