@@ -24,9 +24,10 @@ class ReloadFragment : Fragment() {
         view.reload_button.setOnClickListener {
             val viewPagerFragment = ViewPagerFragment()
             val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
-            transaction.addToBackStack(null)
-            transaction.replace(R.id.fragment_container, viewPagerFragment)
-            transaction.commit()
+            transaction
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, viewPagerFragment)
+                .commit()
         }
     }
 

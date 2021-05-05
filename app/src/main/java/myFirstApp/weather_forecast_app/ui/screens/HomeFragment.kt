@@ -42,9 +42,10 @@ class HomeFragment : Fragment() {
             if (it == false) {
                 val sampleFragment = ReloadFragment()
                 val transaction: FragmentTransaction = fragmentManager!!.beginTransaction()
-                transaction.addToBackStack(null)
-                transaction.replace(R.id.fragment_container, sampleFragment)
-                transaction.commit()
+                transaction
+                    .addToBackStack(null)
+                    .replace(R.id.fragment_container, sampleFragment)
+                    .commit()
             }
         })
 
